@@ -1,27 +1,23 @@
 clear;
-addpath('../Manifold Code');
+addpath('../ManifoldClassification');
+addpath('../ManifoldClassification/drtoolbox/');
 
 colors = 'gb';
 
 n = 500;
 ppm = [0.5*n 0.5*n];
 centers = [5 12; 12 12;];
-stdev = 4;
+stdev = 2;
 [data2,labels]=makegaussmixnd(centers,stdev,ppm);
 labels = labels -1;
-plotcol (data2, ppm, 'gb');
-hold off;
+plot_labelled(data2, 'o', ppm, 'gb');
 
 t = data2(:,1);
 u = data2(:,2);
 data3 = [t.*cos(t) u t.*sin(t)];
-plotcol (data3, ppm, 'gb');
-hold off;
-
-
 labelled_data3 = [data3 labels'];
 shuffled_data3 = labelled_data3(randperm(size(labelled_data3,1)),:);
-
+plot_labelled(shuffled_data3(:,1:end-1), 'a', shuffled_data3(:,end), 'gb');
 
 dim = 3;
 d = 2;
