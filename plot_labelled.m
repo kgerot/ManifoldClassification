@@ -1,4 +1,4 @@
-function plot_labelled (points, method, labels, colors, options)
+function plot_labelled (points, method, labels, colors)
 
 %  plot_labelled plots, either 2D or 3D, a labelled dataset.
 %  either using labels designated by the order in which they appear in the 
@@ -87,8 +87,6 @@ if color_length < labels_length
     errordlg(msg)
     return
 end
-
-[~,dim] = size(points);
 
 figure;
 hold on;
