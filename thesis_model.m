@@ -1,3 +1,17 @@
+function model=thesis_model(data,labels,k)
+
+%  thesis_model returns a classification model composed of knn
+%  classification and logistic regression as well as a delauney
+%  triangulation which defines the area where regression is used
+%
+%  thesis_model(data, labels,k)
+%  where
+%
+%      data      A matrix where each row is an n-dimensional coordinate
+%      labels    An nx1 matrix with labels corresponding to data points
+%      k         Number of nearest neighbors to use
+%
+
 clear;
 addpath('../ManifoldClassification');
 

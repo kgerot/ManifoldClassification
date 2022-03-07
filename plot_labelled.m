@@ -1,13 +1,13 @@
-function plot_labelled (points, method, labels, colors)
+function plot_labelled (points, method, labels, colors, t)
 
 %  plot_labelled plots, either 2D or 3D, a labelled dataset.
 %  either using labels designated by the order in which they appear in the 
 %  data (default) or using individually designated for each point
 %
-%  plot_labelled(points, method, labels, colors)
+%  plot_labelled(points, method, labels, colors, title)
 %  where
 %
-%      points    The dataset in for: Coordinates x Dimension (e.g, 500 3
+%      points    The dataset in form: Coordinates x Dimension (e.g, 500 3
 %                dimensional coordinates would form a 500x3 matrix)
 %      method    default: 'o' (ordered) labels are plotted
 %                'a' (assigned)
@@ -16,11 +16,11 @@ function plot_labelled (points, method, labels, colors)
 %                dataset, use [500 500])
 %                If method is 'a', labels take a single column matrix with
 %                corresponding labels.
-%      colors    A string containing, in order, the color abbreviations
-%                used for each cluster (e.g. 'gb' would color the first
-%                label green and the second label blue)
+%      colors    A list of colors (e.g 'gbkr' for green, blue, black, red 
+%                of [[0,0,0], [0,0,1]] for black, blue)
+%      t         Title of graph
 %
-%  Color choices
+%  Color choices (letters)
 %       
 %      'r'  red (#FF0000)
 %      'g'  green (#00FF00)
@@ -30,6 +30,7 @@ function plot_labelled (points, method, labels, colors)
 %      'y'  yellow (#FFFF00)
 %      'k'  black (#000000)
 %      'w'  white (#FFFFFF)
+%
 
 [N,dim] = size(points);
 
@@ -97,11 +98,12 @@ for m = 1:labels_length
     b = a + labels(m) - 1;
     if (dim == 2)
       view(2)
-      plot(points(a:b,1), points(a:b,2), [ colors(m) '.' ]);
+      plot(points(a:b,1), points(a:b,2), 'Color', colors(:,m), 'LineStyle', 'none', 'Marker', '.');
     elseif (dim == 3)
       view(3)
-      plot3(points(a:b,1), points(a:b,2),points(a:b,3), [ colors(m) '.' ]);
+      plot3(points(a:b,1), points(a:b,2),points(a:b,3), 'Color', colors(:,m), 'LineStyle', 'none', 'Marker', '.');
     end
     current_idx = b + 1;
 end
+title(t)
 hold off;
