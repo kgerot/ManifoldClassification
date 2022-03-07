@@ -14,9 +14,9 @@ stdev = 2;
 labels = labels -1;
 
 % convert to manifold
-t = data2(:,1);
+t_reg = data2(:,1);
 u = data2(:,2);
-data3 = [t.*cos(t) u t.*sin(t) labels'];
+data3 = [t_reg.*cos(t_reg) u t_reg.*sin(t_reg) labels'];
 data3 = data3(randperm(size(data3,1)),:);
 labels = data3(:,end);
 coords = data3(:,1:end-1);
@@ -94,7 +94,6 @@ reg_labels = labels(reg_idx);
 knn_coords = coords(knn_idx, :);
 knn_labels = labels(knn_idx);
 
-clearvars reg_idx knn_idx full_data method idx_range div max_div;
 
 % create models
 knn_model = fitcknn(knn_coords, knn_labels, 'NumNeighbors', 5, ...
@@ -146,7 +145,10 @@ end
 avg_mse = [sum(kfold_mse(1,:))/parts; sum(kfold_mse(2,:))/parts];
 model_mse = sum(avg_mse)/2;
 
-clearvars kr rr kt rt kn rn parts;
+clearvars kr rr 
+
+
+% err = crossval();
 
 % near close error
 % quantifying uncertainty ^ ?

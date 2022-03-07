@@ -66,8 +66,6 @@ if method=='a' % convert to ordered
 end 
 
 [e,labels_length] = size(labels);
-unique_labels = 0:(labels_length-1);
-unique_labels = unique_labels';
 if e~=1
     msg1=sprintf('When using option o, labels must be an 1xn matrix\n');
     msg2=sprintf('Your matrix is %ix%i', e, labels_length);
@@ -91,7 +89,6 @@ end
 
 figure;
 hold on;
-n = [0 n(:)'];
 current_idx = 1;
 for m = 1:labels_length
     a = current_idx;
